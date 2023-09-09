@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  demo-be:
+    build:
+      context: .
+    container_name: demo-be
+    volumes:
+      - "./line_bot:/app:ro"
+    ports:
+      - "5000:5000"
