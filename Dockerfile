@@ -9,4 +9,4 @@ RUN pip install --upgrade pip && \
     poetry config virtualenvs.create false && \
     poetry install
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000", "--reload"]
+CMD ["uvicorn", "line_bot.main:app", "--host", "0.0.0.0", "--port", "5000", "--reload"]

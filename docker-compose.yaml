@@ -4,8 +4,8 @@ services:
   demo-be:
     build:
       context: .
-    container_name: demo-be
+    container_name: line-bot
     volumes:
-      - "./line_bot:/app:ro"
+      - ".:/app:ro"
     ports:
       - "5000:5000"

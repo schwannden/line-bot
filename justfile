@@ -5,16 +5,21 @@ script_dir := if os_family() == "windows" { "./line_bot" } else { "./line_bot" }
 default:
     @just --list --unsorted
 
+prepare:
+    poetry install
+    pre-commit install
+
 test:
   echo "version: $(poetry version -s)"
 
 # build image
 build:
-  docker build . -f Dockerfile.prod -t "schwannden/wl-line-bot:$(poetry version -s)"
+  docker compose build
 
 # publish image
 publish:
-  docker push "schwannden/wl-line-bot:$(poetry version -s)"
+  poetry export --without-hashes --format=requirements.txt > requirements.txt
+  gcloud app deploy .
 
 # start server
 start:
@@ -32,3 +37,4 @@ format:
   autoflake --in-place --remove-all-unused-imports {{script_dir}} -r
   isort --profile black {{script_dir}}
   black {{script_dir}}
+  mypy --ignore-missing-imports --follow-imports=skip --strict-optional {{script_dir}}
