@@ -1,0 +1,41 @@
+repos:
+- repo: https://github.com/hadolint/hadolint
+  rev: v2.12.0
+  hooks:
+  - id: hadolint
+    name: Lint Dockerfiles
+    description: Runs hadolint to lint Dockerfiles
+    language: system
+    types: ["dockerfile"]
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+  - id: check-yaml
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+- repo: https://github.com/PyCQA/autoflake
+  rev: v2.2.1
+  hooks:
+    - id: autoflake
+      name: autoflake (remove useless import)
+      entry: autoflake --in-place --remove-all-unused-imports
+      language: python
+- repo: https://github.com/pycqa/isort
+  rev: 5.12.0
+  hooks:
+    - id: isort
+      name: isort (sort import)
+      args: ["--profile",  "black"]
+      language: python
+- repo: https://github.com/psf/black
+  rev: 23.9.0
+  hooks:
+  - id: black
+    name: black (formatting)
+    language: python
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.5.1
+  hooks:
+  - id: mypy
+    name: mypy (type check)
+    language: python
