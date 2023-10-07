@@ -5,10 +5,13 @@ script_dir := if os_family() == "windows" { "./line_bot" } else { "./line_bot" }
 default:
     @just --list --unsorted
 
+# install poetry and install project dependencies
 prepare:
+    pip install poetry
     poetry install
     pre-commit install
 
+# run unit test
 test:
   echo "version: $(poetry version -s)"
 
