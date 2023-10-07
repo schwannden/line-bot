@@ -37,4 +37,4 @@ stop-docker:
   docker compose down
 
 # restart server
-restart: stop start
+restart-docker: stop-docker start-docker
