@@ -7,9 +7,9 @@ default:
 
 # install poetry and install project dependencies
 prepare:
-    pip install poetry
-    poetry install
-    pre-commit install
+  pip install poetry
+  poetry install
+  pre-commit install
 
 # run unit test
 test:
@@ -26,10 +26,14 @@ publish:
 
 # start server
 start:
+  uvicorn line_bot.main:app --host 0.0.0.0 --port 5000 --reload
+
+# start server in docker
+start-docker:
   docker compose up -d
 
-# stop server
-stop:
+# stop server in docker
+stop-docker:
   docker compose down
 
 # restart server
